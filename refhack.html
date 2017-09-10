@@ -1,0 +1,29 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+</head>
+<body>
+<div id="without"></div>
+<div id="with"></div>
+<script>
+function run_without_referer(i)
+{
+	var i = encodeURIComponent(i);
+	var id = '__rk_' + (new Date).getTime() + Math.floor(Math.random()*9999);
+	var html = '<iframe style="width: 0px; height: 0px; border:0px;" id="' + id + '" ' +
+		'src="javascript:\'<!doctype html><html><body>decodeURIComponent(\\\'' + i + '\\\');</body></html>\'"></iframe>';
+	document.getElementById("without").innerHTML = html;
+}
+function run_with_referer(i)
+{
+	document.getElementById("with").innerHTML = i;
+}
+
+var html = '<form method="POST" id="7654" action="http://blabla.tld/toeter"></form><iframe onload="document.getElementById(7654).submit();" method="POST"></iframe>';
+
+setTimeout(function(){run_without_referer(html);}, 1000);
+setTimeout(function(){run_with_referer(html);}, 3000);
+
+</script>
+</body>
+</html>
