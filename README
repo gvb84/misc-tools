@@ -1,1 +1,5 @@
 resolver.c - a poor man's asynchronous DNS resolver written in C
+
+usscan.c - a UNIX socket scanner which might come in handy when checking local
+UNIX socket access permissions to search for local privilege escalation
+vulnerabilities. Linux only for now.
