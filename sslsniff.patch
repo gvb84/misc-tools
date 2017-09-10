@@ -1,0 +1,73 @@
+diff -ruN sslsniff-0.8/Logger.cpp sslsniff-0.8.1/Logger.cpp
+--- sslsniff-0.8/Logger.cpp	2010-03-10 18:06:29.000000000 -0500
++++ sslsniff-0.8.1/Logger.cpp	2012-08-21 06:01:46.289694283 -0400
+@@ -17,6 +17,9 @@
+  * USA
+  */
+ 
++#include <stdlib.h>
++#include <string.h>
++
+ #include "Logger.hpp"
+ 
+ #include <log4cpp/Category.hh>
+@@ -37,21 +40,44 @@
+ }
+ 
+ void Logger::logFromServer(std::string &name, char *buf, int len) {
++  char * buf2;
++  int i;
+   std::string data(buf, len);
+   std::string message = "Read from Server (";
+   message.append(name);
+   message.append(") :\n");
+-  message.append(data);
++
++  buf2 = (char *)malloc((len*3)+1);
++  memset(buf2, 0, (len*3)+1);
++
++  for (i=0;i<len;i++) {
++	sprintf(buf2+(i*2), "%.2X", (unsigned char)(buf[i]));
++  }
++
++  message.append(buf2);
++  free(buf2);
+ 
+   log4cpp::Category::getInstance("sslsniff").debug(message);
+ }
+ 
+ void Logger::logFromClient(std::string &name, char* buf, int len) {
++  char * buf2;
++  int i;
+   std::string data(buf, len);
+   std::string message = "Read from Client (";
+   message.append(name);
+-  message.append(") :\n");
+-  message.append(data);
++  message.append(") \n");
++
++ 
++  buf2 = (char *)malloc((len*3)+1);
++  memset(buf2, 0, (len*3)+1);
++
++  for (i=0;i<len;i++) {
++	sprintf(buf2+(i*2), "%.2X", (unsigned char)(buf[i]));
++  }
++
++  message.append(buf2);
++  free(buf2);
+ 
+   log4cpp::Category::getInstance("sslsniff").debug(message);
+ }
+diff -ruN sslsniff-0.8/SSLConnectionManager.cpp sslsniff-0.8.1/SSLConnectionManager.cpp
+--- sslsniff-0.8/SSLConnectionManager.cpp	2010-03-10 18:06:30.000000000 -0500
++++ sslsniff-0.8.1/SSLConnectionManager.cpp	2012-08-21 06:00:03.041182312 -0400
+@@ -141,7 +141,7 @@
+   if (!error) {
+     try {
+       boost::shared_ptr<SSLBridge> bridge((destination.port() == HTTPS_PORT) ? 
+-					  new HTTPSBridge(clientSocket, &serverSocket) : 
++					  new SSLBridge(clientSocket, &serverSocket) :
+ 					  new SSLBridge(clientSocket, &serverSocket));
+ 
+       bridge->handshakeWithServer();

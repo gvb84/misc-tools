@@ -4,4 +4,8 @@ usscan.c - a UNIX socket scanner which might come in handy when checking local
 UNIX socket access permissions to search for local privilege escalation
 vulnerabilities. Linux only for now.
 
-refhack.html - HTTP referrer hack which is a stripped down version of https://code.google.com/p/referrer-killer/
+refhack.html - HTTP referrer hack which is a stripped down version of
+https://code.google.com/p/referrer-killer/
+
+sslsniff.patch - Quick sslsniff patch which logs in hex format and doesn't
+assume that it's HTTP+SSL that runs over port 443.
