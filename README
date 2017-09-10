@@ -13,3 +13,6 @@ assume that it's HTTP+SSL that runs over port 443.
 dietlibc-0.33-python3.3.patch - Quick patch to compile Python 3.3 with
 dietlibc-0.33. The patch fixes missing wcstrtok and two defines needed for
 modern Linux systems. 
+
+pnghash.c - calculates perceptual hash values over PNG files which can be used
+to find similarly looking PNG files relatively quickly.
