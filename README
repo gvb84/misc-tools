@@ -1,1 +1,1 @@
-# misc-tools
+resolver.c - a poor man's asynchronous DNS resolver written in C
