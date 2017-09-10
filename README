@@ -16,3 +16,6 @@ modern Linux systems.
 
 pnghash.c - calculates perceptual hash values over PNG files which can be used
 to find similarly looking PNG files relatively quickly.
+
+analyzer.py - simple Python tool to mess with images and hough transformation
+and edge/line detection in the images relatively quickly.
