@@ -9,3 +9,7 @@ https://code.google.com/p/referrer-killer/
 
 sslsniff.patch - Quick sslsniff patch which logs in hex format and doesn't
 assume that it's HTTP+SSL that runs over port 443.
+
+dietlibc-0.33-python3.3.patch - Quick patch to compile Python 3.3 with
+dietlibc-0.33. The patch fixes missing wcstrtok and two defines needed for
+modern Linux systems. 
