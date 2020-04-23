@@ -19,3 +19,5 @@ to find similarly looking PNG files relatively quickly.
 
 analyzer.py - simple Python tool to mess with images and hough transformation
 and edge/line detection in the images relatively quickly.
+
+github-backup-script.sh - simple Bash script to backup a GitHub org including wiki + repo's
